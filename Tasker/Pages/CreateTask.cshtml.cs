@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
 namespace Tasker.Pages
 {
@@ -21,6 +22,11 @@ namespace Tasker.Pages
 
         public IActionResult OnPost()
         {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
             _context.Tasks.Add(NewTask);
             _context.SaveChanges();
 
